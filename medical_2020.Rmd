@@ -1,0 +1,40 @@
+---
+title: "Medical 2020"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+
+
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = "90%"
+)
+
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+```
+
+##Import data
+```{r}
+medical_2020 <- read_xlsx("Medical 2020.xlsx")
+```
+
+##Summing up cost by tos
+```{r}
+medical_2020 %>% 
+  group_by(tos) %>% 
+  summarize(total_cost = sum(cost)) %>% 
+  knitr::kable()
+```
+
